@@ -1,11 +1,11 @@
 import * as pdfjsLib from 'pdfjs-dist';
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs?url';
 import mammoth from 'mammoth';
 
-// Configure pdf.js worker using Vite URL
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
-
-/**
+// Configure pdf.js worker (original working setup)
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.mjs',
+  import.meta.url
+).toString();
  * Extract text from a PDF file
  * Returns { text, pageCount }
  */
