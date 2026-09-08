@@ -212,11 +212,7 @@ export default function ATSResults() {
               ? 'General Keywords to Consider'
               : `Keyword Analysis — ${result.keywords.templateLabel || intake?.desiredRole}`}
           </h2>
-
-          {result.keywords.genericNote && (
-            <p className="results-section__note">{result.keywords.genericNote}</p>
-          )}
-
+          
           <div className="keywords-grid">
             <div className="keywords-column">
               <h3 className="keywords-column__title keywords-column__title--found">
