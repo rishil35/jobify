@@ -1,0 +1,179 @@
+/* Keep component spacing above the shared section utility. */
+.section.hero-section {
+  padding-top: 180px;
+  padding-bottom: 60px;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* ─── Decorative Assets ─── */
+.hero-deco {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-deco--megaphone {
+  left: 4%;
+  top: 38%;
+  width: 98px;
+  height: auto;
+}
+
+.hero-deco--search {
+  right: 4%;
+  top: 22%;
+  width: 82px;
+  height: auto;
+}
+
+/* ─── Heading ─── */
+.hero-heading {
+  font-size: clamp(38px, 4.85vw, 56px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--black);
+  margin-bottom: 32px;
+}
+
+.hero-heading--purple {
+  color: var(--brand-purple);
+}
+
+/* ─── Subtitle ─── */
+.hero-subtitle {
+  font-size: clamp(14px, 1.56vw, 15px);
+  font-weight: 200;
+  color: var(--black);
+  line-height: 1.4;
+  max-width: 500px;
+  margin-bottom: 52px;
+}
+
+/* ─── Upload Card ─── */
+.upload-card {
+  width: 365px;
+  max-width: calc(100% - 32px);
+  padding: 28px 24px;
+  background: var(--white);
+  border: 3px dashed rgba(139, 141, 155, 0.45);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.upload-card:hover,
+.upload-card--drag {
+  border-color: var(--brand-purple);
+  box-shadow: 0 0 0 4px rgba(106, 80, 226, 0.08);
+}
+
+.upload-card__icon {
+  margin-bottom: 4px;
+}
+
+.upload-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.upload-card__formats {
+  font-size: 13px;
+  color: var(--muted-gray);
+}
+
+.upload-card__btn {
+  width: 100%;
+  max-width: 300px;
+  height: 47px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 14px;
+  margin-top: 4px;
+}
+
+.upload-card__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.upload-card__error {
+  font-size: 13px;
+  color: var(--sale-red);
+  text-align: center;
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .section.hero-section {
+    padding-top: 152px;
+  }
+
+  .hero-deco--megaphone {
+    width: 78px;
+    left: 2%;
+    top: 35%;
+  }
+
+  .hero-deco--search {
+    width: 66px;
+    right: 2%;
+    top: 18%;
+  }
+}
+
+@media (max-width: 600px) {
+  .section.hero-section {
+    padding-top: 120px;
+    padding-bottom: 48px;
+  }
+
+  .hero-subtitle {
+    max-width: calc(100% - 32px);
+    margin-bottom: 40px;
+  }
+
+  .hero-deco {
+    display: none;
+  }
+
+  .hero-heading {
+    font-size: clamp(32px, 8vw, 42px);
+    max-width: calc(100% - 32px);
+  }
+
+  .hero-subtitle br {
+    display: none;
+  }
+
+  .upload-card {
+    width: calc(100% - 32px);
+  }
+
+  .upload-card__btn {
+    max-width: 100%;
+  }
+}

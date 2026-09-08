@@ -1,0 +1,192 @@
+/* ─── Design Tokens ─── */
+:root {
+  /* Colors */
+  --black: #121212;
+  --brand-purple: #6A50E2;
+  --dark-purple: #13072E;
+  --muted-gray: #8B8D9B;
+  --card-lilac: #EFEEF4;
+  --white: #FFFFFF;
+  --cta-text-light: #F9F9F9;
+  --sale-red: #FC583B;
+  --border-gray: #8B8D9B;
+  --soft-lavender: #E8E3FF;
+  --secondary-purple: #AE82F5;
+
+  /* Gradient */
+  --brand-gradient: linear-gradient(90deg, #6841ED 0%, #805BF0 55%, #B184F7 100%);
+
+  /* Typography */
+  --font-family: 'Poppins', sans-serif;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-btn: 20px;
+  --radius-card: 24px;
+  --radius-footer: 42px;
+
+  /* Spacing */
+  --content-max-width: 1200px;
+  --section-padding: 80px 0;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--black);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-family);
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-family);
+}
+
+/* ─── Page Background ─── */
+.page-background {
+  background:
+    radial-gradient(circle at 50% -10%, rgba(132, 103, 255, 0.18), transparent 34%),
+    radial-gradient(circle at 2% 92%, rgba(114, 80, 226, 0.14), transparent 28%),
+    #ffffff;
+}
+
+/* ─── Utility Classes ─── */
+.container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.gradient-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--brand-gradient);
+  color: var(--cta-text-light);
+  border-radius: var(--radius-btn);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 28px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.gradient-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.gradient-btn:active {
+  transform: translateY(0);
+}
+
+/* ─── Section Base ─── */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  position: relative;
+}
+
+/* Sticky header offset for anchor navigation */
+#home,
+#pricing,
+#about,
+#testimonials,
+#footer {
+  scroll-margin-top: 100px;
+}
+
+.section-heading {
+  font-size: clamp(22px, 2.66vw, 26px);
+  font-weight: 700;
+  color: var(--black);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: clamp(13px, 1.56vw, 15px);
+  font-weight: 200;
+  color: var(--black);
+  text-align: center;
+  line-height: 1.4;
+  margin-top: 12px;
+  max-width: 520px;
+}
+
+/* ─── Focus Styles ─── */
+:focus-visible {
+  outline: 2px solid var(--brand-purple);
+  outline-offset: 2px;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-lilac);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-purple);
+}

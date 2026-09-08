@@ -1,0 +1,160 @@
+.testimonials-section {
+  padding: 0 0 30px;
+  justify-content: flex-start;
+}
+
+.testimonials-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 24px;
+}
+
+/* ─── Collage ─── */
+.testimonials-collage {
+  margin: 36px 0 28px;
+  width: 100%;
+  max-width: 860px;
+}
+
+.testimonials-collage img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ─── CTA ─── */
+.testimonials-cta {
+  font-size: 13px;
+  font-weight: 300;
+  padding: 9px 28px;
+  border-radius: 18px;
+  margin-bottom: 28px;
+}
+
+/* ─── Trusted Logo Strip ─── */
+.trusted-strip {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  overflow: hidden;
+  height: 60px;
+  gap: 32px;
+}
+
+.trusted-strip__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  white-space: nowrap;
+  padding-left: 24px;
+  flex-shrink: 0;
+}
+
+/* ─── Marquee ─── */
+.marquee-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+
+.marquee-logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.7;
+  filter: grayscale(0.2);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+  }
+
+  .marquee-wrapper {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .testimonials-collage {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonials-section {
+    padding: 24px 0 0;
+  }
+
+  .testimonials-collage {
+    margin: 24px 0 20px;
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .testimonials-collage img {
+    min-width: 600px;
+  }
+
+  .trusted-strip {
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+    padding: 16px 24px;
+  }
+
+  .trusted-strip__label {
+    padding-left: 0;
+  }
+
+  .marquee-track {
+    gap: 36px;
+  }
+
+  .marquee-logo {
+    height: 24px;
+  }
+}
