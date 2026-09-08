@@ -1,11 +1,9 @@
 import * as pdfjsLib from 'pdfjs-dist';
+import pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs?url';
 import mammoth from 'mammoth';
 
-// Configure pdf.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.mjs',
-  import.meta.url
-).toString();
+// Configure pdf.js worker using Vite URL
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 /**
  * Extract text from a PDF file
@@ -13,7 +11,8 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
  */
 async function extractPdfText(file) {
   const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  // Wrapping in Uint8Array ensures compatibility across mobile browsers
+  const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
   const pageCount = pdf.numPages;
   let fullText = '';
 
@@ -45,16 +44,29 @@ async function extractDocxText(file) {
 
 /**
  * Extract text from uploaded resume file
- * Supports PDF and DOCX
+ * Supports PDF and DOCX (Checks both MIME type and file extension for mobile compatibility)
  */
 export async function extractText(file) {
-  const type = file.type;
+  const fileName = (file.name || '').toLowerCase();
+  const fileType = (file.type || '').toLowerCase();
 
-  if (type === 'application/pdf') {
+  const isPdf =
+    fileType === 'application/pdf' ||
+    fileType === 'application/x-pdf' ||
+    fileName.endsWith('.pdf');
+
+  const isDocx =
+    fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+    fileType === 'application/msword' ||
+    fileType.includes('word') ||
+    fileName.endsWith('.docx') ||
+    fileName.endsWith('.doc');
+
+  if (isPdf) {
     return extractPdfText(file);
   }
 
-  if (type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+  if (isDocx) {
     return extractDocxText(file);
   }
 
