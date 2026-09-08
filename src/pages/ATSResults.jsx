@@ -169,11 +169,6 @@ export default function ATSResults() {
             <TrendingUp size={20} />
             Score Breakdown
           </h2>
-          <p className="results-section__note">
-            Automated category scores are capped at 90% (18/20 or 27/30), and the overall score is capped at 70/100.
-            These are product limits, not evidence of missing qualifications. Individual checks below show what was detected;
-            a full score on those checks does not establish overall resume quality or guarantee hiring outcomes.
-          </p>
           <div className="breakdown-grid">
             {breakdownCards.map(card => {
               const pct = card.data.max > 0
