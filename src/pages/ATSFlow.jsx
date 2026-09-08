@@ -25,7 +25,7 @@ export default function ATSFlow() {
   });
   const [errors, setErrors] = useState({});
   const [processingStep, setProcessingStep] = useState(0);
-  const [extractionError, setExtractionError] = useState(false);
+  const [extractionError, setExtractionError] = useState(null);
 
   // Check for uploaded file
   useEffect(() => {
@@ -75,11 +75,11 @@ export default function ATSFlow() {
     else navigate('/');
   };
 
-  const runAnalysis = async () => {
+const runAnalysis = async () => {
     try {
       const file = window.__JOBIFY_UPLOADED_FILE__;
       if (!file) {
-        setExtractionError(true);
+        setExtractionError('No uploaded file found in memory (session expired).');
         return;
       }
 
@@ -92,7 +92,7 @@ export default function ATSFlow() {
       const { text, pageCount } = await extractText(file);
 
       if (!text || text.trim().length < 20) {
-        setExtractionError(true);
+        setExtractionError(`Extracted text is too short (${text ? text.trim().length : 0} chars).`);
         return;
       }
 
@@ -117,10 +117,9 @@ export default function ATSFlow() {
       navigate('/ats/results');
     } catch (err) {
       console.error('ATS analysis error:', err);
-      setExtractionError(true);
+      setExtractionError(err?.message || String(err));
     }
   };
-
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && step < 5) {
       goNext();
@@ -134,7 +133,7 @@ export default function ATSFlow() {
     navigate('/');
   };
 
-  // Extraction error state
+// Extraction error state
   if (extractionError) {
     return (
       <div className="ats-flow page-background">
@@ -145,7 +144,13 @@ export default function ATSFlow() {
           <div className="ats-error">
             <h2 className="ats-error__title">We couldn't read this resume.</h2>
             <p className="ats-error__body">Try uploading a text-based PDF or DOCX file.</p>
-            <button className="gradient-btn ats-error__btn" onClick={handleRetry}>
+            
+            {/* Show exact error details on mobile */}
+            <div style={{ color: '#DC2626', background: '#FEE2E2', padding: '10px 14px', borderRadius: '8px', fontSize: '13px', marginTop: '14px', wordBreak: 'break-word', textAlign: 'left' }}>
+              <strong>Details:</strong> {extractionError}
+            </div>
+
+            <button className="gradient-btn ats-error__btn" onClick={handleRetry} style={{ marginTop: '16px' }}>
               Try Again
             </button>
           </div>
