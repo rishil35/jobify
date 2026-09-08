@@ -1,17 +1,18 @@
 import * as pdfjsLib from 'pdfjs-dist';
 import mammoth from 'mammoth';
 
-// Configure pdf.js worker (original working setup)
+// Configure pdf.js worker for stable 3.11.174
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.mjs',
+  'pdfjs-dist/build/pdf.worker.min.js',
   import.meta.url
 ).toString();
+
+/**
  * Extract text from a PDF file
  * Returns { text, pageCount }
  */
 async function extractPdfText(file) {
   const arrayBuffer = await file.arrayBuffer();
-  // Wrapping in Uint8Array ensures compatibility across mobile browsers
   const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
   const pageCount = pdf.numPages;
   let fullText = '';
